@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CatagoriesNav from './CatagoriesNav'
 import toast from 'react-hot-toast'
 import MovieCard from './MovieCard'
+import MovieSlider from './MovieSlider'
 
 export default function MovieGallary() {
     const [movie, setMovie]= useState([])
@@ -9,11 +10,12 @@ export default function MovieGallary() {
     const [selectcatagories, setselectcatagories]= useState("All")
     const [showAll, setshowAll]=useState(false)
     useEffect(()=>{
-        fetch("/public/movie.json").then(res=> res.json()).then(data=>{ setMovie(data); toast.success('Successfully toasted!')}).catch((error)=> toast.error("Fail Data Loading")).finally(()=> setloading(false))
+        fetch("/public/movie.json").then(res=> res.json()).then(data=>{ setMovie(data); toast.success('Successfully Data Loaded!')}).catch((error)=> toast.error("Fail Data Loading!")).finally(()=> setloading(false))
     },[])
     const Catagoriews = ["All",...new Set(movie.map(data=> data.category))];
     const filter = selectcatagories === "All" ? movie : movie.filter((m)=> m.category === selectcatagories);
     const visiblemovie = showAll ? filter : filter.slice(0,8);
+    const ratings = movie.filter(movie=> movie.rating > 7);
   return (
     <div className='w-11/12 mx-auto py-10'>
       <h1 className='text-md md:text-lg lg:text-2xl font-bold'>RECOMMENDED FOR YOU</h1>
@@ -40,7 +42,7 @@ export default function MovieGallary() {
             filter.length > 8 && (
 
               <div className='flex justify-center mt-10'>
-                <button className='bg-amber-500 py-2 px-3 rounded-2xl'
+                <button className='bg-amber-500 py-2 px-3 rounded-full text-black font-bold'
                 onClick={()=> setshowAll(!showAll)}
                 >{showAll? "Show Less": "Show More"}</button>
               </div>
@@ -49,7 +51,8 @@ export default function MovieGallary() {
           </>
         ): (<p>No Movie Found</p>)
       }
-
+      <h1 className='font-bold text-center mt-5 text-[35px]'>Top Ratings Movies</h1>
+      <MovieSlider movies={ratings}></MovieSlider>
     </div>
   )
 }

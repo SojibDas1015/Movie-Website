@@ -18,3 +18,15 @@ html, body, #root{
 .swiper-pagination-bullet-active{
     background-color: yellow !important;
 }
+.swiper-button-prev{
+    color:yellow !important;
+    background-color: rgba(255, 255, 0, 0.185);
+    padding: 10px;
+    border-radius: 50px;
+}
+.swiper-button-next{
+    color:yellow !important;
+    background-color: rgba(255, 255, 0, 0.185);
+    padding: 10px;
+    border-radius: 50px;
+}
