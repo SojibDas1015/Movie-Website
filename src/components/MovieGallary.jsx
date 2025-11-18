@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import MovieCard from './MovieCard'
 import MovieSlider from './MovieSlider'
 
-export default function MovieGallary() {
+export default function MovieGallary({search}) {
     const [movie, setMovie]= useState([])
     const [loading, setloading]= useState(true)
     const [selectcatagories, setselectcatagories]= useState("All")
@@ -15,7 +15,8 @@ export default function MovieGallary() {
     const Catagoriews = ["All",...new Set(movie.map(data=> data.category))];
     const filter = selectcatagories === "All" ? movie : movie.filter((m)=> m.category === selectcatagories);
     const visiblemovie = showAll ? filter : filter.slice(0,8);
-    const ratings = movie.filter(movie=> movie.rating > 7);
+    const ratings = movie.filter(movie=> movie.rating > 7)
+    .filter((moviee)=>moviee.title.toLowerCase().includes(search.toLowerCase()));
   return (
     <div className='w-11/12 mx-auto py-10'>
       <h1 className='text-md md:text-lg lg:text-2xl font-bold'>RECOMMENDED FOR YOU</h1>

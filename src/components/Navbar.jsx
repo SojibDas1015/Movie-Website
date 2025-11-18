@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Navbar() {
+export default function Navbar({search, setsearch}) {
     const link = (
         <>
             <li>HOME</li>
@@ -49,7 +49,10 @@ export default function Navbar() {
                                     <path d="m21 21-4.3-4.3"></path>
                                 </g>
                             </svg>
-                            <input type="search" required placeholder="Search" className='outline-none bg-transparent text-sm text-white placeholder-white/60 w-10 md:w-50 hidden sm:flex' />
+                            <input type="search" required placeholder="Search" className='outline-none bg-transparent text-sm text-white placeholder-white/60 w-10 md:w-50 hidden sm:flex' 
+                            value={search}
+                            onChange={(e)=>setsearch(e.target.value)}
+                            />
                         </label>
                         <div className="avatar">
                             <div className="ring-[#facc15] ring-offset-black/40 rounded-full ring-2 ring-offset-2">
