@@ -10,7 +10,7 @@ export default function MovieGallary({search}) {
     const [selectcatagories, setselectcatagories]= useState("All")
     const [showAll, setshowAll]=useState(false)
     useEffect(()=>{
-        fetch("/public/movie.json").then(res=> res.json()).then(data=>{ setMovie(data); toast.success('Successfully Data Loaded!')}).catch((error)=> toast.error("Fail Data Loading!")).finally(()=> setloading(false))
+        fetch("/movie.json").then(res=> res.json()).then(data=>{ setMovie(data); toast.success('Successfully Data Loaded!')}).catch((error)=> toast.error("Fail Data Loading!")).finally(()=> setloading(false))
     },[])
     const Catagoriews = ["All",...new Set(movie.map(data=> data.category))];
     const filter = selectcatagories === "All" ? movie : movie.filter((m)=> m.category === selectcatagories);
